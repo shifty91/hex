@@ -45,7 +45,7 @@ int process_line(const unsigned char *buf, unsigned int real_length)
 	printf(" |");
 	for (int i = 0; i < real_length; ++i) {
 		int c = (int)buf[i];
-		if (c <= 0x20 || c >= 0x7f)
+		if (c < 0x20 || c >= 0x7f)
 			c = '.';
 		printf("%c", c);
 	}
