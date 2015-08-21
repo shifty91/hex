@@ -35,6 +35,12 @@ int process_line(const unsigned char *buf, unsigned int real_length)
 		if ((i + 1) % 2 == 0)
 			printf(" ");
 	}
+	for (int i = real_length; i < LINE_LENGTH; ++i) {
+		if ((i + 1) % 2 == 0)
+			printf("   ");
+		else
+			printf("  ");
+	}
 
 	printf(" |");
 	for (int i = 0; i < real_length; ++i) {
