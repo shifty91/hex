@@ -49,6 +49,8 @@ int process_line(const unsigned char *buf, unsigned int real_length)
 			c = '.';
 		printf("%c", c);
 	}
+	for (int i = real_length; i < LINE_LENGTH; ++i)
+		printf(" ");
 	printf("|\n");
 
 	fflush(stdout);
