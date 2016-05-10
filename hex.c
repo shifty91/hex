@@ -19,6 +19,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 /* adjust for your needs */
 #define LINE_LENGTH 0x10
@@ -58,18 +59,11 @@ int process_line(const unsigned char *buf, unsigned int real_length)
 	return 0;
 }
 
-int main(int argc, char **argv)
+static int hexdump_file(FILE *f)
 {
-	FILE *f;
 	unsigned int written = 0;
 	unsigned char buf[LINE_LENGTH];
 	int c;
-
-	f = argc > 1 ? fopen(argv[1], "r") : stdin;
-	if (!f) {
-		perror("fopen() failed");
-		return EXIT_FAILURE;
-	}
 
 	while ((c = fgetc(f)) != EOF) {
 		buf[written++] = c;
@@ -80,14 +74,30 @@ int main(int argc, char **argv)
 	}
 	if (ferror(f)) {
 		perror("fgetc() failed");
-		return EXIT_FAILURE;
+		return -EIO;
 	}
-
-	if (argc > 1)
-		fclose(f);
 
 	if (written != 0)
 		process_line(buf, written);
+
+	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	FILE *f;
+
+	f = argc > 1 ? fopen(argv[1], "r") : stdin;
+	if (!f) {
+		perror("fopen() failed");
+		return EXIT_FAILURE;
+	}
+
+	if (hexdump_file(f))
+		return EXIT_FAILURE;
+
+	if (argc > 1)
+		fclose(f);
 
 	return EXIT_SUCCESS;
 }
