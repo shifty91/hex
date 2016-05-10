@@ -64,12 +64,16 @@ int main(int argc, char **argv)
 	unsigned char buf[LINE_LENGTH];
 	int c;
 
-	while ((c = getc(stdin)) != EOF) {
+	while ((c = fgetc(stdin)) != EOF) {
 		buf[written++] = c;
 		if (written == LINE_LENGTH) {
 			written = 0;
 			process_line(buf, LINE_LENGTH);
 		}
+	}
+	if (ferror(stdin)) {
+		perror("fgetc() failed");
+		return EXIT_FAILURE;
 	}
 
 	if (written != 0)
