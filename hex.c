@@ -21,7 +21,7 @@
 #include <stdlib.h>
 
 /* adjust for your needs */
-static const unsigned int LINE_LENGTH = 0x10;
+#define LINE_LENGTH 0x10
 
 static
 int process_line(const unsigned char *buf, unsigned int real_length)

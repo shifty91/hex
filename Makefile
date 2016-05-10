@@ -1,6 +1,7 @@
 RM      := rm
 CC      := clang
-CFLAGS  := -std=gnu99 -Wall -O2 -DDEBUG
+LD      := clang
+CFLAGS  := -std=gnu99 -Wall -pedantic -O2 -march=native
 LDFLAGS :=
 SOURCES := $(shell find . -name "*.c" -type f -print)
 OBJECTS := $(SOURCES:%.c=%.o)
@@ -11,7 +12,7 @@ all: $(PROG)
 
 $(PROG): $(OBJECTS)
 	@echo "LD		$@"
-	@$(CC) $(LDFLAGS) -o $@ $^
+	@$(LD) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
 	@echo "CC		$@"
