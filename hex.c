@@ -60,21 +60,31 @@ int process_line(const unsigned char *buf, unsigned int real_length)
 
 int main(int argc, char **argv)
 {
+	FILE *f;
 	unsigned int written = 0;
 	unsigned char buf[LINE_LENGTH];
 	int c;
 
-	while ((c = fgetc(stdin)) != EOF) {
+	f = argc > 1 ? fopen(argv[1], "r") : stdin;
+	if (!f) {
+		perror("fopen() failed");
+		return EXIT_FAILURE;
+	}
+
+	while ((c = fgetc(f)) != EOF) {
 		buf[written++] = c;
 		if (written == LINE_LENGTH) {
 			written = 0;
 			process_line(buf, LINE_LENGTH);
 		}
 	}
-	if (ferror(stdin)) {
+	if (ferror(f)) {
 		perror("fgetc() failed");
 		return EXIT_FAILURE;
 	}
+
+	if (argc > 1)
+		fclose(f);
 
 	if (written != 0)
 		process_line(buf, written);

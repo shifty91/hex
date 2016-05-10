@@ -7,13 +7,14 @@ hexdump.
 
 # Usage #
 
+    $ hex file.txt
     $ cat file.txt | hex
 
 # Build #
 
 Just hit
 
-    $ make
+    $ gmake
 
 # Author #
 
