@@ -7,8 +7,15 @@ hexdump.
 
 # Usage #
 
+Hexdump utility:
+
     $ hex file.txt
     $ cat file.txt | hex
+
+xxd's possibility to generate C include files :)
+
+    $ hex -i file.txt >> file.h
+
 
 # Build #
 
