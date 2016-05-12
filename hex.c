@@ -99,7 +99,7 @@ static void prepare_file_name(const char * restrict src, char * restrict dest)
 	/* caller has to make sure, that dest is large enough :P */
 	for (; *p ; p++, s++) {
 		*s = *p;
-		if (*p == '/')
+		if (*p == '/' || *p == '.')
 			*s = '_';
 	}
 	*s = '\0';
