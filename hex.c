@@ -136,6 +136,8 @@ static int include_file(const char *file, FILE *f)
 		return -EIO;
 	}
 
+	fflush(stdout);
+
 	return 0;
 }
 
