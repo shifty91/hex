@@ -143,7 +143,7 @@ static int include_file(const char *file, FILE *f)
 int main(int argc, char **argv)
 {
 	FILE *f;
-	int i = 0, c;
+	int i = 0, c, res;
 
 	while ((c = getopt_long(argc, argv, "i", long_opts, NULL)) != -1) {
 		switch (c) {
@@ -168,15 +168,13 @@ int main(int argc, char **argv)
 	}
 
 	if (i) {
-		if (include_file(argc > 0 ? argv[0] : "stdin", f))
-			return EXIT_FAILURE;
+		res = include_file(argc > 0 ? argv[0] : "stdin", f);
 	} else {
-		if (hexdump_file(f))
-			return EXIT_FAILURE;
+		res = hexdump_file(f);
 	}
 
 	if (argc > 0)
 		fclose(f);
 
-	return EXIT_SUCCESS;
+	return res ? EXIT_FAILURE : EXIT_SUCCESS;
 }
