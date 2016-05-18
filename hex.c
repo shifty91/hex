@@ -93,11 +93,10 @@ static int hexdump_file(FILE *f)
 
 static void prepare_file_name(const char * restrict src, char * restrict dest)
 {
-	const char *p = src;
 	char *s = dest;
 
 	/* caller has to make sure, that dest is large enough :P */
-	for (; *p ; p++, s++) {
+	for (const char *p = src; *p; p++, s++) {
 		*s = *p;
 		if (*p == '/' || *p == '.')
 			*s = '_';
