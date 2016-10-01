@@ -44,12 +44,11 @@ int process_line(const unsigned char *buf, unsigned int real_length)
 		if ((i + 1) % 2 == 0)
 			printf(" ");
 	}
-	for (int i = real_length; i < LINE_LENGTH; ++i) {
+	for (int i = real_length; i < LINE_LENGTH; ++i)
 		if ((i + 1) % 2 == 0)
 			printf("   ");
 		else
 			printf("  ");
-	}
 
 	printf(" |");
 	for (int i = 0; i < real_length; ++i) {
@@ -167,11 +166,7 @@ int main(int argc, char **argv)
 		return EXIT_FAILURE;
 	}
 
-	if (i) {
-		res = include_file(argc > 0 ? argv[0] : "stdin", f);
-	} else {
-		res = hexdump_file(f);
-	}
+	res = i ? include_file(argc > 0 ? argv[0] : "stdin", f) : hexdump_file(f);
 
 	if (argc > 0)
 		fclose(f);
