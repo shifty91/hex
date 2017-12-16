@@ -32,7 +32,7 @@ $(PROG): $(OBJECTS)
 
 clean:
 	@echo "CLEAN"
-	$(Q)$(RM) -f *.o *.d main
+	$(Q)$(RM) -f *.o *.d $(PROG)
 
 install: $(PROG)
 	@echo "Installing		$<"
