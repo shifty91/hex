@@ -21,7 +21,9 @@ xxd's possibility to generate C include files :)
 
 Just hit
 
-    $ gmake
+    $ ./autogen.sh
+    $ ./configure
+    $ sudo make install
 
 # Author #
 
